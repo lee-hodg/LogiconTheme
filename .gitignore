@@ -1,0 +1,9 @@
+*.swp
+*.sqlite3
+*.pyc
+*.log
+/venv
+local_settings.py
+celerybeat-schedule
+*.pjson
+*.p 

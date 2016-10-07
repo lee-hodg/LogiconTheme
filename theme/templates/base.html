@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load staticfiles pages_tags mezzanine_tags i18n  %}
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+<head>
+    <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+    <link rel="shortcut icon" href="{% static 'css/img/favicon.ico' %}">
+
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    {% compress css %}
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/slicknav.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/jquery.fancybox.css' %}" rel="stylesheet" type="text/css" media="screen" />
+    {% block extra_css %}{% endblock %}
+    {% endcompress %}
+
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
+	<script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.localscroll-1.2.7-min.js"></script>
+    {% compress js %}
+    <script type="text/javascript" src="{% static 'js/jquery.fancybox.pack.js' %}"></script>
+    <script type='text/javascript' src='{% static "js/viewportchecker.js" %}'></script>
+    <script>
+     	jQuery(document).ready(function() {
+    		jQuery('.onscroll').addClass("hidden").viewportChecker({
+        		classToAdd: 'visible animated fadeIn', // Class to add to the elements when they are visible
+        		offset: 100    
+       		});
+       		jQuery('.skill-item').addClass("hidden").viewportChecker({
+        		classToAdd: 'shown', // Class to add to the elements when they are visible
+        		offset: 10    
+       		});   
+       });
+    </script>
+	<!--MOBILE MENU-->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $('.nav').slicknav({
+              prependTo:'#mobile_menu',
+              closeOnClick:true
+          });
+        });
+    </script>  
+    {% block extra_js %}{% endblock %}
+    {% endcompress %}
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+	<header class="header" role="banner">
+        <div class="header-bg-global-wrapper">
+        	<div style="height: 696px;" class="bg-global">
+        		<div class="bg-trame"></div>
+        	</div>
+        </div>
+		<div id="inner-header">
+			<div class="site-title">
+                <a href="#home" class="nav-hash" title="{{ settings.SITE_TITLE }}">{{ settings.SITE_TITLE }}</a>
+			</div>
+				<div class="menu-wrapper">
+					<nav class="main-menu" role="navigation">
+						<ul id="menu-menu-principal" class="nav top-nav cf">
+							<li><a href="#portfolio">Portfolio</a></li>
+							<li><a href="#services">Services</a></li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</nav>
+
+					<div class="btn-social-wrapper">
+                        {% if settings.SOCIAL_LINK_FACEBOOK %}
+                            <a rel="facebook" href="{{ settings.SOCIAL_LINK_FACEBOOK }}" class="fancyimage">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        {% endif %}
+                        {% if settings.SOCIAL_LINK_ELANCE %}
+                            <a href="{{settings.SOCIAL_LINK_ELANCE}}" target="_blank" title="Elance Profile">
+                                <span style="font-size: 22px;">E</span>
+                            </a>
+                        {% endif %}
+					</div>
+					<div class="mobile_menu_container">
+                        <div id="mobile_menu"></div>
+                	</div>
+				</div>
+			</div>
+	</header><!-- header -->
+
+	<div id="content">
+        {% block content %}
+            <div class="bg-global">
+                <div class="bg-trame"></div>
+            </div>
+            <div class="inner-content">
+                {% block inner_content %} {% endblock %}
+            </div> <!-- inner-content -->
+	    {% endblock %}	
+	</div> <!-- content -->
+
+    {% include "includes/footer_scripts.html" %}
+</body>
+
+</html>
