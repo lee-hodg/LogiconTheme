@@ -19,7 +19,7 @@ def portfolioitem_processor(request, page):
 def home_processor(request, page):
     items = PortfolioItem.objects.published(for_user=request.user).prefetch_related('categories')
     items = items.filter(featured=True)  # only keep featured ones.
-    paginator = Paginator(items, 1)
+    paginator = Paginator(items, 6)
     page_no = request.GET.get('page')
     try:
         items = paginator.page(page_no)

@@ -30,7 +30,7 @@ class JSONResponseMixin(object):
 
 class AJAXPortfolioPageView(JSONResponseMixin, ListView):
     model = PortfolioItem
-    paginate_by = 1
+    paginate_by = 6
     context_object_name = "items"
 
     def render_to_response(self, context):
@@ -57,6 +57,7 @@ class AJAXPortfolioPageView(JSONResponseMixin, ListView):
 #             return self.render_to_json_response({'section_html': section_html})
 #         else:
 #             return HttpResponseBadRequest('AJAX only')
+
 
 class AJAXPortfolioDetailView(DetailView):
     model = PortfolioItem

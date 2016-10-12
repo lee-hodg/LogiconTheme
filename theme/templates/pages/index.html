@@ -16,9 +16,8 @@
 				alert(textStatus+' : '+errorThrown);
 			},
 			success: function(response) { // on AJAX success..
-				console.log('GOOD'); 
                 $('.portfolio-and-page').html(response['section_html']);
-                
+                $.scrollTo('#portfolio');
 		   }
 	   });
 	});
