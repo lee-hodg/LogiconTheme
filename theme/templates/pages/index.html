@@ -1,2 +1,82 @@
 {% extends "pages/page.html" %}
-{% block inner_content %} hello {% endblock %}
+{% load i18n static mezzanine_tags %}
+{% block inner_content %} 
+<div id="main" role="main">
+	<div id="home" class="content-wrap" style="min-height: 620px; padding-top: 150px; padding-bottom: 200px;">
+		<div class="content-wrap-inner">
+			<div class="logo">
+				<img src="{% static 'css/img/logicon_logo.png' %}" alt="Logicon">
+			</div>
+            <h1>{% editable page.homepage.heading %} {{ page.homepage.heading }} {% endeditable %}</h1>
+		</div><!-- content-wrap-inner -->
+	</div><!-- home -->
+
+    <div id="portfolio" class="content-wrap" style="min-height: 620px;">
+        <div class="content-wrap-inner">
+            <h2>{% editable page.homepage.portfolio_heading %} {{ page.homepage.portfolio_heading }} {% endeditable %}</h2>
+            <h3>{% editable page.homepage.portfolio_subheading %} {{ page.homepage.portfolio_subheading }} {% endeditable %}</h3>
+            
+            <div class="sep"></div>
+
+            <div class="portfolio-wrap clearfix">
+                <div class="portfolio normal onscroll">
+                </div>
+            </div>
+        </div><!-- content-wrap-inner -->
+    </div><!-- portfolio -->
+
+
+<div id="services" class="content-wrap" style="min-height: 511px;" >
+	<div class="content-wrap-inner">
+		<h2>{% editable page.homepage.services_heading %} {{ page.homepage.services_heading }} {% endeditable %}</h2>
+		<h3>{% editable page.homepage.services_subheading %} {{ page.homepage.services_subheading }} {% endeditable %}</h3>
+
+		<div class="sep"></div>
+
+		<div class="clearfix" id="slider-skills">
+			<div class="skills-wrapper slides-wrapper">
+				<div class="skill-item slide-item">
+					<div class="icon-wrapper">
+						<span class="icon-skills-html5"></span>
+					</div>
+					<div class="infos">
+						<div class="inner">
+							<h4>HTML5 / CSS3</h4>
+							<p>Joe is proficient in both HTML5 and CSS3, specialising in creating visually stunning websites</p>
+						</div>
+					</div>
+				</div>
+			</div><!--slides-wrapper-->
+		</div><!--slider-skills-->
+	</div><!-- content-wrap-inner-->
+</div><!-- services -->	
+
+<footer id="contact" class="footer" role="contentinfo">
+	<div class="inner-footer">
+		<div class="address-wrap">
+			<h4>{{ settings.SITE_TITLE }}</h4>
+			<p>
+				<span class="names">Lee Hodgkinson (Backend)</span><br><br>
+				<a href="mailto:lee@logicon-solutions.co.uk" target="_blank" title="lee@logicon-solutions.co.uk">lee@logicon-solutions.co.uk</a><br>
+				<br>
+				<i class="fa fa-skype"></i><span>hodgey84</span>
+			</p>
+			<p>
+				<span class="names">Joe Consiglio (Frontend)</span><br><br>
+				<a href="mailto:joe@logicon-solutions.co.uk" title="joe@logicon-solutions.co.uk">joe@logicon-solutions.co.uk</a><br>
+				<br>
+				<i class="fa fa-skype"></i><span>facebook:joeyconsiglio<span>
+			</p>
+		</div>
+
+	</div>
+</footer>
+
+
+
+
+
+
+
+
+{% endblock %}

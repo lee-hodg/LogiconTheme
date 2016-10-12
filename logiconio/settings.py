@@ -295,6 +295,8 @@ OPTIONAL_APPS = (
     PACKAGE_NAME_GRAPPELLI,
 )
 
+SECRET_KEY = 'b+9130pdny-930z#)#s+&b-$gse_4zf#lc!c1j9m^72r%5(rwc'
+
 ##################
 # LOCAL SETTINGS #
 ##################
