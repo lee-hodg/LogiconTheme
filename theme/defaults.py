@@ -19,11 +19,29 @@ register_setting(
 )
 
 register_setting(
-    name="GMAP_LOC",
-    label=_("Google map location"),
-    description=_("Address for google maps. "),
+    name="GPG_KEY",
+    label=_("Public key for gpg"),
+    description=_("Link to gpg public key on keyserver "
+        "header."),
     editable=True,
-    default="Manchester, England",
+    default="",
+)
+
+
+register_setting(
+    name="UPWORK_PROFILE",
+    label=_("Upwork profile"),
+    description=_("Link to upwork profile"),
+    editable=True,
+    default="http://www.upwork.com/o/profiles/users/_~01dcfbf8526ffd5b29/",
+)
+
+register_setting(
+    name="EMAIL",
+    label=_("Email address"),
+    description=_("Email address for contact"),
+    editable=True,
+    default="lee@logicon.io",
 )
 
 #TEMPLATE_ACCESSIBLE_SETTINGS is one of the existing settings
@@ -33,6 +51,8 @@ register_setting(
     name="TEMPLATE_ACCESSIBLE_SETTINGS",
     append=True,                           #Because we append these to
     default=("SOCIAL_LINK_FACEBOOK",       #existing templatate accessible settings.
-             "GMAP_LOC",
+             "EMAIL",
+			 "UPWORK_PROFILE",
+			 "GPG_KEY",
              ),
 )

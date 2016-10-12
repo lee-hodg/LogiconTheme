@@ -30,7 +30,7 @@
 	<div id="home" class="content-wrap" style="min-height: 620px; padding-top: 150px; padding-bottom: 200px;">
 		<div class="content-wrap-inner">
 			<div class="logo">
-				<img src="{% static 'css/img/logicon_logo.png' %}" alt="Logicon">
+                <img src="{{MEDIA_URL}}{% thumbnail page.homepage.logo_icon 200 200 top=0 %}" alt="{{ settings.SITE_TITLE}}" />
 			</div>
             <h1>{% editable page.homepage.heading %} {{ page.homepage.heading }} {% endeditable %}</h1>
 		</div><!-- content-wrap-inner -->
@@ -123,29 +123,11 @@
 <footer id="contact" class="footer" role="contentinfo">
 	<div class="inner-footer">
 		<div class="address-wrap">
-			<h4>{{ settings.SITE_TITLE }}</h4>
 			<p>
-				<span class="names">Lee Hodgkinson (Backend)</span><br><br>
-				<a href="mailto:lee@logicon-solutions.co.uk" target="_blank" title="lee@logicon-solutions.co.uk">lee@logicon-solutions.co.uk</a><br>
-				<br>
-				<i class="fa fa-skype"></i><span>hodgey84</span>
+            {% editable page.homepage.contact_text %} {{ page.homepage.contact_text|richtext_filters|safe}} {% endeditable %}
 			</p>
-			<p>
-				<span class="names">Joe Consiglio (Frontend)</span><br><br>
-				<a href="mailto:joe@logicon-solutions.co.uk" title="joe@logicon-solutions.co.uk">joe@logicon-solutions.co.uk</a><br>
-				<br>
-				<i class="fa fa-skype"></i><span>facebook:joeyconsiglio<span>
-			</p>
+			<div class="copyright">&copy; {% now "Y" %} {{settings.SITE_TITLE }}. All Rights Reserved.</div>                        
 		</div>
-
 	</div>
 </footer>
-
-
-
-
-
-
-
-
 {% endblock %}

@@ -82,14 +82,19 @@
 					</nav>
 
 					<div class="btn-social-wrapper">
-                        {% if settings.SOCIAL_LINK_FACEBOOK %}
-                            <a rel="facebook" href="{{ settings.SOCIAL_LINK_FACEBOOK }}" class="fancyimage">
-                                <i class="fa fa-facebook"></i>
+                        {% if settings.EMAIL %}
+                            <a rel="email"  href="mailto:{{ settings.EMAIL }}" class="fancyimage">
+                                <i class="fa fa-envelope-o"></i>
                             </a>
                         {% endif %}
-                        {% if settings.SOCIAL_LINK_ELANCE %}
-                            <a href="{{settings.SOCIAL_LINK_ELANCE}}" target="_blank" title="Elance Profile">
-                                <span style="font-size: 22px;">E</span>
+                        {% if settings.UPWORK_PROFILE %}
+                            <a href="{{settings.UPWORK_PROFILE}}" target="_blank" title="Upwork Profile">
+                                <span style="font-size: 22px;">U</span>
+                            </a>
+                        {% endif %}
+                        {% if settings.GPG_KEY %}
+                            <a href="{{settings.GPG_KEY}}" target="_blank" title="GPG Key">
+                                <span style="font-size: 22px;"><i class="fa fa-lock"></i></span>
                             </a>
                         {% endif %}
 					</div>
