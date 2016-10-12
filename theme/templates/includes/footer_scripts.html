@@ -16,25 +16,7 @@ _gaq.unshift(['_setAccount', '{{ settings.GOOGLE_ANALYTICS_ID }}']);
 {% endif %}
 </script>
 
-<!-- FancyBox -->
-<script type="text/javascript">
-	$(document).ready(function() {        
-		$(".fancyimage").fancybox({
-			helpers: {
-				overlay: {
-					locked: false
-				}
-			},
-			padding: 10,
-			beforeShow: function() {
-				this.title = $(this.element).data("caption");
-			}
-		});
-	});
-</script>
-
-
-<!-- javascript that will initiate jQuery and the LocalScroll plugin -->
+<!-- javascript that will initiate the LocalScroll plugin -->
 <script>
 	jQuery(document).ready(function(){
 		$.localScroll({

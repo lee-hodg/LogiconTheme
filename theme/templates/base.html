@@ -19,13 +19,16 @@
 
     <!-- fotorama.css & fotorama.js. -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    {# Used on the portfolio modal for image slider #}
     <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
-    <script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
-	<script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.localscroll-1.2.7-min.js"></script>
+    {# The effect to slowly scroll between sections of index #}
+    <script src="//cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
+    <script src="//cdn.jsdelivr.net/jquery.localscroll/1.4.0/jquery.localScroll.min.js"></script>
     {% compress js %}
+    {# The portfolio modal popup #}
     <script type="text/javascript" src="{% static 'js/jquery.modal.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.fancybox.pack.js' %}"></script>
+    {# The effect whereby the service items fade into view #}
     <script type='text/javascript' src='{% static "js/viewportchecker.js" %}'></script>
     <script>
      	jQuery(document).ready(function() {
@@ -50,7 +53,8 @@
           });
         });
     </script>  
-    <script>
+    <script type="text/javascript">
+        {# when the portfolio modal open init fotorama #}
         $(document).on($.modal.OPEN, function(event, modal) {
                 $('.fotorama').fotorama();
         });
