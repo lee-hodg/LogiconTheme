@@ -1,3 +1,14 @@
+.pagination{
+    float:right;
+    padding: 20px;
+}
+
+.pagination, .pagination span, .pagination a, .pagination .step-links a{
+    color: #808080;
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+
 #exposeMask{
     z-index: 9!important;
 }
@@ -722,7 +733,7 @@ body {
 
 .skills-wrapper .skill-item {
     width: 320px;
-    height: 420px;
+    height: 300px;
 }
 
 .skills-wrapper .skill-item {
@@ -748,7 +759,7 @@ body {
 .skills-wrapper .skill-item .icon-wrapper {
     float: left;
     width: 100%;
-    height: 180px;
+    height: 80px;
     text-align: center;
     transform: scale(1);
 }
@@ -760,7 +771,7 @@ body {
 
 .skills-wrapper .skill-item .icon-wrapper {
     width: 260px;
-    height: 180px;
+    height: 80px;
     padding: 0px 0px 0px 59px;
 }
 
@@ -774,7 +785,7 @@ body {
 }
 
 .skills-wrapper .skill-item .icon-wrapper span {
-    font-size: 180px;
+    font-size: 80px;
 }
 
 .skills-wrapper .skill-item .infos {
@@ -1066,7 +1077,7 @@ body {
 
     .skills-wrapper .skill-item .icon-wrapper {
         width: 260px;
-        height: 180px;
+        height: 80px;
         padding: 0px 0px 0px 59px;
     }
 
@@ -1100,7 +1111,7 @@ body {
 
     .skills-wrapper .skill-item {
         width: 320px;
-        height: 420px;
+        height: 300px;
     }
 
     .skills-wrapper .skill-item .infos {

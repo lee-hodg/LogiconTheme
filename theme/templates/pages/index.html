@@ -19,13 +19,49 @@
             <div class="sep"></div>
 
             <div class="portfolio-wrap clearfix">
-                <div class="portfolio normal onscroll">
-                </div>
-            </div>
+				{% for item in items %}
+					<div class="portfolio {% if item.highlighted %} big {% else %} normal {% endif %} onscroll">
+						<a rel="{{ item.title }}" href="{{item.href}}" target="_blank">
+							<div class="trame"></div>
+							<div class="border-left"></div>
+							{% if item.highlighted %}
+								<img src="{{MEDIA_URL}}{% thumbnail item.featured_image 640 320 top=0 %}" alt="">
+							{% else %}
+								<img src="{{MEDIA_URL}}{% thumbnail item.featured_image 320 320 top=0 %}" alt="">
+							{% endif %}
+							<div class="infos">
+								<h4>{{ item.title }}</h4>
+								<div class="tags">
+									{% for c in item.categories.all %}
+										<span class="tag">{{c.title}}</span>
+									{% endfor %}
+								</div>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
+				</div>
+				<div class="pagination">
+					<span class="step-links">
+						{% if items.has_previous %}
+							<a href="?page={{ items.previous_page_number }}"><i class="fa fa-arrow-circle-o-left"></i></a>
+						{% endif %}
+
+						<span class="current">
+							{{ items.number }} of {{ items.paginator.num_pages }}.
+						</span>
+
+						{% if items.has_next %}
+							<a href="?page={{ items.next_page_number }}"><i class="fa fa-arrow-circle-o-right"></i></a>
+						{% endif %}
+					</span>
+				</div>
         </div><!-- content-wrap-inner -->
     </div><!-- portfolio -->
 
 
+{# Note we chose related name as 'blurbs' in theme.models when spec ForeignKey #}
+{% if page.homepage.blurbs.all %}
 <div id="services" class="content-wrap" style="min-height: 511px;" >
 	<div class="content-wrap-inner">
 		<h2>{% editable page.homepage.services_heading %} {{ page.homepage.services_heading }} {% endeditable %}</h2>
@@ -35,21 +71,28 @@
 
 		<div class="clearfix" id="slider-skills">
 			<div class="skills-wrapper slides-wrapper">
+				{% for blurb in page.homepage.blurbs.all %}
 				<div class="skill-item slide-item">
 					<div class="icon-wrapper">
-						<span class="icon-skills-html5"></span>
+						{% if blurb.fa_icon != 'none'%}
+						<i class="home-icon fa fa-5x {{ blurb.fa_icon }}"></i>
+						{% elif blurb.icon %}
+							<img style="margin-bottom:10px;" src="{{ MEDIA_URL }}{% thumbnail blurb.icon.url 70 0 %}" alt=""  />
+						{% endif %}
 					</div>
 					<div class="infos">
 						<div class="inner">
-							<h4>HTML5 / CSS3</h4>
-							<p>Joe is proficient in both HTML5 and CSS3, specialising in creating visually stunning websites</p>
+							<h4>{{ blurb.title }}</h4>
+							<p>{{ blurb.content }}</p>
 						</div>
 					</div>
 				</div>
+				{% endfor %}
 			</div><!--slides-wrapper-->
 		</div><!--slider-skills-->
 	</div><!-- content-wrap-inner-->
 </div><!-- services -->	
+{% endif %}
 
 <footer id="contact" class="footer" role="contentinfo">
 	<div class="inner-footer">

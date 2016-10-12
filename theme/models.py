@@ -89,7 +89,7 @@ class PortfolioItem(Page, RichText):
     #NB the related names are what you will need when grabbing these
     #objects in either view or template after dotting.
     featured = models.BooleanField() #to be featured on homepage or not.
-
+    highlighted = models.BooleanField()  # Is it big or small on homepage
     featured_image = FileField(verbose_name=_('Featured Image'),
         upload_to=upload_to('theme.PortfolioItem.featured_image', 'portfolio'),
         format='Image', max_length=255, null=True, blank=True)
