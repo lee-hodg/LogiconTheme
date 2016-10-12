@@ -1,3 +1,35 @@
+
+.button {
+    background-color:#0D79A9;
+	border-radius: 2px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.modal a.button{
+	color: #fff!important;
+}
+
+.modal a{
+	color: #808080!important;
+	font-weight:bold;
+}
+
+.modal{
+    background: transparent url(img/bg-paper.jpg) repeat scroll 0px 0px !important;
+    max-width: 100%!important;
+    color: #808080!important;
+}
+
+.blocker{
+    z-index: 50!important;
+}
+
 .pagination{
     float:right;
     padding: 20px;

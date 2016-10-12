@@ -1,0 +1,31 @@
+{% load mezzanine_tags staticfiles %}
+
+<div class="row">
+    <div class="col-lg-8">
+        <div id="portfolio_carousel">
+            <div class="fotorama" data-width="100%">
+            {% for image in portfolioitem.images.all %}    
+                <img src="{{ MEDIA_URL }}{% thumbnail image.file 770 515 %}" alt="" />
+             {% endfor %}
+             </div>
+         </div>
+    </div>
+    <div class="col-lg-4">
+        <ul class="links">
+        {% for c in portfolioitem.categories.all %}
+        <li> {{c.title }} </li>
+        {% endfor %}
+        </ul>
+        {% if page.portfolioitem.href %}<a class="button" href="{{ page.portfolioitem.href }}" target="_blank">Launch project</a>{% endif %}
+    </div>
+</div> <!--row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        {% editable page.portfolioitem.content %}
+        {{ page.portfolioitem.content|richtext_filters|safe }}
+        {% endeditable %}
+    </div>
+</div><!--row-->
+
+

@@ -1,4 +1,29 @@
 {% extends "pages/page.html" %}
+{% block extra_js %}
+	<script type="text/javascript">
+	$(document).on('click', '.pagination a', function(){
+		$.ajax({ // create an AJAX call...
+			// Show or hide loader before/after each request
+			// beforeSend:function(){
+			// 		$(".loading-wrapper").show();
+			// },
+			// complete:function(){
+			// 		$(".loading-wrapper").hide();
+			// },
+			type: 'GET',
+			url: "{% url 'portpage' %}?page=" + $(this).attr('data-pageno'), 
+			error: function (jqXHR, textStatus, errorThrown) {
+				alert(textStatus+' : '+errorThrown);
+			},
+			success: function(response) { // on AJAX success..
+				console.log('GOOD'); 
+                $('.portfolio-and-page').html(response['section_html']);
+                
+		   }
+	   });
+	});
+	</script>
+{% endblock %}
 {% load i18n static mezzanine_tags %}
 {% block inner_content %} 
 <div id="main" role="main">
@@ -17,45 +42,46 @@
             <h3>{% editable page.homepage.portfolio_subheading %} {{ page.homepage.portfolio_subheading }} {% endeditable %}</h3>
             
             <div class="sep"></div>
+            <div class="portfolio-and-page">
+                <div class="portfolio-wrap clearfix">
+                    {% for item in items %}
+                        <div class="portfolio {% if item.highlighted %} big {% else %} normal {% endif %} onscroll">
+                            <a href="{% url "page" item.slug %}" rel="modal:open">
+                                <div class="trame"></div>
+                                <div class="border-left"></div>
+                                {% if item.highlighted %}
+                                    <img src="{{MEDIA_URL}}{% thumbnail item.featured_image 640 320 top=0 %}" alt="">
+                                {% else %}
+                                    <img src="{{MEDIA_URL}}{% thumbnail item.featured_image 320 320 top=0 %}" alt="">
+                                {% endif %}
+                                <div class="infos">
+                                    <h4>{{ item.title }}</h4>
+                                    <div class="tags">
+                                        {% for c in item.categories.all %}
+                                            <span class="tag">{{c.title}}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="pagination">
+                        <span class="step-links">
+                            {% if items.has_previous %}
+                                <a class="prev-link" data-pageno="{{ items.previous_page_number }}"><i class="fa fa-arrow-circle-o-left"></i></a>
+                            {% endif %}
 
-            <div class="portfolio-wrap clearfix">
-				{% for item in items %}
-					<div class="portfolio {% if item.highlighted %} big {% else %} normal {% endif %} onscroll">
-						<a rel="{{ item.title }}" href="{{item.href}}" target="_blank">
-							<div class="trame"></div>
-							<div class="border-left"></div>
-							{% if item.highlighted %}
-								<img src="{{MEDIA_URL}}{% thumbnail item.featured_image 640 320 top=0 %}" alt="">
-							{% else %}
-								<img src="{{MEDIA_URL}}{% thumbnail item.featured_image 320 320 top=0 %}" alt="">
-							{% endif %}
-							<div class="infos">
-								<h4>{{ item.title }}</h4>
-								<div class="tags">
-									{% for c in item.categories.all %}
-										<span class="tag">{{c.title}}</span>
-									{% endfor %}
-								</div>
-							</div>
-						</a>
-					</div>
-				{% endfor %}
-				</div>
-				<div class="pagination">
-					<span class="step-links">
-						{% if items.has_previous %}
-							<a href="?page={{ items.previous_page_number }}"><i class="fa fa-arrow-circle-o-left"></i></a>
-						{% endif %}
+                            <span class="current">
+                                {{ items.number }} of {{ items.paginator.num_pages }}.
+                            </span>
 
-						<span class="current">
-							{{ items.number }} of {{ items.paginator.num_pages }}.
-						</span>
-
-						{% if items.has_next %}
-							<a href="?page={{ items.next_page_number }}"><i class="fa fa-arrow-circle-o-right"></i></a>
-						{% endif %}
-					</span>
-				</div>
+                            {% if items.has_next %}
+                                <a class="next-link" data-pageno="{{ items.next_page_number }}"><i class="fa fa-arrow-circle-o-right"></i></a>
+                            {% endif %}
+                        </span>
+               </div>
+            </div>
         </div><!-- content-wrap-inner -->
     </div><!-- portfolio -->
 

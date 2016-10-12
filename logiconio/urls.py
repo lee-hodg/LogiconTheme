@@ -5,8 +5,8 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.views.i18n import set_language
 
-from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
+from theme.views import AJAXPortfolioPageView
 import mezzanine
 
 admin.autodiscover()
@@ -72,6 +72,7 @@ urlpatterns += [
     # ``mezzanine.urls`` INCLUDES A *CATCH ALL* PATTERN
     # FOR PAGES, SO URLPATTERNS ADDED BELOW ``mezzanine.urls``
     # WILL NEVER BE MATCHED!
+    url(r'^ajaxportfolioitems/$', AJAXPortfolioPageView.as_view(), name="portpage"),
 
     # If you'd like more granular control over the patterns in
     # ``mezzanine.urls``, go right ahead and take the parts you want
