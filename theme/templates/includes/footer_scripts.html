@@ -24,3 +24,13 @@ _gaq.unshift(['_setAccount', '{{ settings.GOOGLE_ANALYTICS_ID }}']);
 		});
 	});
 </script>
+
+<script type="text/javascript">
+$('a.open-modal').click(function(event) {
+  $(this).modal({
+      fadeDuration: 350,
+      fadeDelay: 0.80
+  });
+ return false;
+});
+</script>
