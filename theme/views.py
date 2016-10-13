@@ -44,21 +44,6 @@ class AJAXPortfolioPageView(JSONResponseMixin, ListView):
         else:
             return HttpResponseBadRequest('AJAX only')
 
-# class AJAXPortfolioDetailView(JSONResponseMixin, DetailView):
-#     model = PortfolioItem
-#
-#     def render_to_response(self, context):
-#         if self.request.is_ajax():
-#             # AJAX req.
-#             context.update({'MEDIA_URL': settings.MEDIA_URL})
-#             modal_html = render_to_string('pages/_portfolio_modal_snippet.html',
-#                                           RequestContext(self.request, context)
-#                                           )
-#             return self.render_to_json_response({'section_html': section_html})
-#         else:
-#             return HttpResponseBadRequest('AJAX only')
-
-
 class AJAXPortfolioDetailView(DetailView):
     model = PortfolioItem
     template_name = 'pages/_portfolio_modal_snippet.html'
