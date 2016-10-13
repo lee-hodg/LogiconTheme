@@ -1,4 +1,5 @@
-
+/*****************THINGS ADDED BY LEE *****************************/
+/* Button on modal portfolio detail, which links to launch project*/
 .button {
     background-color:#0D79A9;
 	border-radius: 2px;
@@ -26,10 +27,12 @@
     color: #808080!important;
 }
 
+/* to do with modal portfolio detail popup*/
 .blocker{
     z-index: 50!important;
 }
 
+/* Pagination for portfolio section */
 .pagination{
     float:right;
     padding: 20px;
@@ -40,10 +43,13 @@
     font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-
+/* The Mezzanine overlay when doing inline editable edits
+ * The form has z-index of parent, 10, despite element style attempting to set 99999
+ * that's how z-index works, so we must set the overlay to lower*/
 #exposeMask{
     z-index: 9!important;
 }
+/*****************************************************************************************/
 
 @font-face{
 	font-family:'NexaLight';
