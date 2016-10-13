@@ -67,6 +67,16 @@
 footer a{
     color: #fff;
 }
+
+.ajax-loader{
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.ajax-loader img{
+    padding:100px;
+}
 /*****************************************************************************************/
 
 @font-face{

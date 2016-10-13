@@ -6,12 +6,15 @@
 	$(document).on('click', '.pagination a', function(){
 		$.ajax({ // create an AJAX call...
 			// Show or hide loader before/after each request
-			// beforeSend:function(){
-			// 		$(".loading-wrapper").show();
-			// },
-			// complete:function(){
-			// 		$(".loading-wrapper").hide();
-			// },
+			beforeSend:function(){
+					$(".ajax-loader").show();
+                    $(".portfolio-and-page").hide();
+                    $.scrollTo('#portfolio');
+			},
+			complete:function(){
+					$(".ajax-loader").hide();
+                    $(".portfolio-and-page").show();
+			},
 			type: 'GET',
 			url: "{% url 'portpage' %}?page=" + $(this).attr('data-pageno'), 
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -43,6 +46,9 @@
             <h3>{% editable page.homepage.portfolio_subheading %} {{ page.homepage.portfolio_subheading }} {% endeditable %}</h3>
             
             <div class="sep"></div>
+            <div class="ajax-loader" style="display:none">
+                <img src="{% static 'css/img/ajax-loader.gif' %}" />
+            </div>
             <div class="portfolio-and-page">
                 {% with items as page_obj %}
                     {% include 'pages/_portfolioitems_snippet.html' %}
