@@ -12,11 +12,11 @@ class HomePage(Page, RichText):
     '''
     A page representing the format of the home page
     '''
-    heading = models.CharField(max_length=500,
-                               default=("WELCOME TO LOGICON HEADQUARTERS."
-                                        " OUR TEAM COMBINES STRONG TECHNICAL KNOW HOW"
-                                        " WITH THE ABILITY TO DELIVER HIGHLY POLISHED SOLUTIONS."),
-                               help_text='Heading under the logo')
+    heading = RichTextField(max_length=500,
+                            default=("WELCOME TO LOGICON HEADQUARTERS."
+                                     " OUR TEAM COMBINES STRONG TECHNICAL KNOW HOW"
+                                     " WITH THE ABILITY TO DELIVER HIGHLY POLISHED SOLUTIONS."),
+                            help_text='Heading under the logo')
     logo_icon = FileField(verbose_name=_('Logo Image'),
                           upload_to=upload_to('theme.HomePage.logo_icon', 'icons'),
                           format='Image', max_length=255, blank=True, null=True)
@@ -39,11 +39,11 @@ class HomePage(Page, RichText):
                                                      'on the home page.')
 
     contact_text = RichTextField(max_length=1000,
-                                    default=('One of our team would be happy to discuss'
-                                             ' in detail our skillset and experience'
-                                             ' and how we fit in with your project.'
-                                             ' Send us an email using the link below.'),
-                                    help_text='Text for contact section')
+                                 default=('One of our team would be happy to discuss'
+                                          ' in detail our skillset and experience'
+                                          ' and how we fit in with your project.'
+                                          ' Send us an email using the link below.'),
+                                 help_text='Text for contact section')
 
     class Meta:
         verbose_name = _('Home page')

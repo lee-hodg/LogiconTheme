@@ -49,6 +49,24 @@
 #exposeMask{
     z-index: 9!important;
 }
+
+.editable-form textarea, .editable-form input {
+    color: #000;
+}
+
+.editable-form .helptext{
+    line-height:1;
+    font-size:18px!important;
+    text-transform:none!important;
+}
+
+.btn-social-wrapper i{
+    padding-left:1.5px;
+}
+
+footer a{
+    color: #fff;
+}
 /*****************************************************************************************/
 
 @font-face{

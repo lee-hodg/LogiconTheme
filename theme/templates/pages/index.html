@@ -33,7 +33,7 @@
 			<div class="logo">
                 <img src="{{MEDIA_URL}}{% thumbnail page.homepage.logo_icon 200 200 top=0 %}" alt="{{ settings.SITE_TITLE}}" />
 			</div>
-            <h1>{% editable page.homepage.heading %} {{ page.homepage.heading }} {% endeditable %}</h1>
+            <h1>{% editable page.homepage.heading %} {{ page.homepage.heading|richtext_filters|safe}} {% endeditable %}</h1>
 		</div><!-- content-wrap-inner -->
 	</div><!-- home -->
 
