@@ -1,4 +1,6 @@
 {% extends "pages/page.html" %}
+{% load i18n static mezzanine_tags %}
+
 {% block extra_js %}
 	<script type="text/javascript">
 	$(document).on('click', '.pagination a', function(){
@@ -23,7 +25,7 @@
 	});
 	</script>
 {% endblock %}
-{% load i18n static mezzanine_tags %}
+
 {% block inner_content %} 
 <div id="main" role="main">
 	<div id="home" class="content-wrap" style="min-height: 620px; padding-top: 150px; padding-bottom: 200px;">
@@ -42,91 +44,56 @@
             
             <div class="sep"></div>
             <div class="portfolio-and-page">
-                <div class="portfolio-wrap clearfix">
-                    {% for item in items %}
-                        <div class="portfolio {% if item.highlighted %} big {% else %} normal {% endif %} onscroll">
-                            <a href="{% url "page" item.slug %}" rel="modal:open">
-                                <div class="trame"></div>
-                                <div class="border-left"></div>
-                                {% if item.highlighted %}
-                                    <img src="{{MEDIA_URL}}{% thumbnail item.featured_image 640 320 top=0 %}" alt="">
-                                {% else %}
-                                    <img src="{{MEDIA_URL}}{% thumbnail item.featured_image 320 320 top=0 %}" alt="">
-                                {% endif %}
-                                <div class="infos">
-                                    <h4>{{ item.title }}</h4>
-                                    <div class="tags">
-                                        {% for c in item.categories.all %}
-                                            <span class="tag">{{c.title}}</span>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="pagination">
-                        <span class="step-links">
-                            {% if items.has_previous %}
-                                <a class="prev-link" data-pageno="{{ items.previous_page_number }}"><i class="fa fa-arrow-circle-o-left"></i></a>
-                            {% endif %}
-
-                            <span class="current">
-                                {{ items.number }} of {{ items.paginator.num_pages }}.
-                            </span>
-
-                            {% if items.has_next %}
-                                <a class="next-link" data-pageno="{{ items.next_page_number }}"><i class="fa fa-arrow-circle-o-right"></i></a>
-                            {% endif %}
-                        </span>
-               </div>
+                {% with items as page_obj %}
+                    {% include 'pages/_portfolioitems_snippet.html' %}
+                {% endwith %}
             </div>
-        </div><!-- content-wrap-inner -->
+        </div><!--content-wrap-inner-->
     </div><!-- portfolio -->
 
 
-{# Note we chose related name as 'blurbs' in theme.models when spec ForeignKey #}
-{% if page.homepage.blurbs.all %}
-<div id="services" class="content-wrap" style="min-height: 511px;" >
-	<div class="content-wrap-inner">
-		<h2>{% editable page.homepage.services_heading %} {{ page.homepage.services_heading }} {% endeditable %}</h2>
-		<h3>{% editable page.homepage.services_subheading %} {{ page.homepage.services_subheading }} {% endeditable %}</h3>
+    {# Note we chose related name as 'blurbs' in theme.models when spec ForeignKey #}
+    {% if page.homepage.blurbs.all %}
+    <div id="services" class="content-wrap" style="min-height: 511px;" >
+        <div class="content-wrap-inner">
+            <h2>{% editable page.homepage.services_heading %} {{ page.homepage.services_heading }} {% endeditable %}</h2>
+            <h3>{% editable page.homepage.services_subheading %} {{ page.homepage.services_subheading }} {% endeditable %}</h3>
 
-		<div class="sep"></div>
+            <div class="sep"></div>
 
-		<div class="clearfix" id="slider-skills">
-			<div class="skills-wrapper slides-wrapper">
-				{% for blurb in page.homepage.blurbs.all %}
-				<div class="skill-item slide-item">
-					<div class="icon-wrapper">
-						{% if blurb.fa_icon != 'none'%}
-						<i class="home-icon fa fa-5x {{ blurb.fa_icon }}"></i>
-						{% elif blurb.icon %}
-							<img style="margin-bottom:10px;" src="{{ MEDIA_URL }}{% thumbnail blurb.icon.url 70 0 %}" alt=""  />
-						{% endif %}
-					</div>
-					<div class="infos">
-						<div class="inner">
-							<h4>{{ blurb.title }}</h4>
-							<p>{{ blurb.content }}</p>
-						</div>
-					</div>
-				</div>
-				{% endfor %}
-			</div><!--slides-wrapper-->
-		</div><!--slider-skills-->
-	</div><!-- content-wrap-inner-->
-</div><!-- services -->	
-{% endif %}
+            <div class="clearfix" id="slider-skills">
+                <div class="skills-wrapper slides-wrapper">
+                    {% for blurb in page.homepage.blurbs.all %}
+                    <div class="skill-item slide-item">
+                        <div class="icon-wrapper">
+                            {% if blurb.fa_icon != 'none'%}
+                            <i class="home-icon fa fa-5x {{ blurb.fa_icon }}"></i>
+                            {% elif blurb.icon %}
+                                <img style="margin-bottom:10px;" src="{{ MEDIA_URL }}{% thumbnail blurb.icon.url 70 0 %}" alt=""  />
+                            {% endif %}
+                        </div>
+                        <div class="infos">
+                            <div class="inner">
+                                <h4>{{ blurb.title }}</h4>
+                                <p>{{ blurb.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div><!--slides-wrapper-->
+            </div><!--slider-skills-->
+        </div><!-- content-wrap-inner-->
+    </div><!-- services -->	
+    {% endif %}
 
-<footer id="contact" class="footer" role="contentinfo">
-	<div class="inner-footer">
-		<div class="address-wrap">
-			<p>
-            {% editable page.homepage.contact_text %} {{ page.homepage.contact_text|richtext_filters|safe}} {% endeditable %}
-			</p>
-			<div class="copyright">&copy; {% now "Y" %} {{settings.SITE_TITLE }}. All Rights Reserved.</div>                        
-		</div>
-	</div>
-</footer>
+    <footer id="contact" class="footer" role="contentinfo">
+        <div class="inner-footer">
+            <div class="address-wrap">
+                <p>
+                {% editable page.homepage.contact_text %} {{ page.homepage.contact_text|richtext_filters|safe}} {% endeditable %}
+                </p>
+                <div class="copyright">&copy; {% now "Y" %} {{settings.SITE_TITLE }}. All Rights Reserved.</div>                        
+            </div>
+        </div>
+    </footer>
 {% endblock %}
