@@ -1,6 +1,47 @@
 {% extends "pages/page.html" %}
 {% load i18n static mezzanine_tags %}
 
+{% block extra_css %}
+{{ block.super }}
+    <style type="text/css">
+        .footer {
+			{% if page.homepage.footer_img %}
+				background: transparent url("{{MEDIA_URL}}{{page.homepage.footer_img}}") no-repeat scroll center center / cover;
+			{% else %}
+				background: transparent url("{{STATIC_URL}}css/img/bg-contact.jpg") no-repeat scroll center center / cover;
+			{% endif %}
+        }
+		.header .header-bg-global-wrapper .bg-global {
+			{% if page.homepage.bg_global_img %}
+				background: transparent url("{{ MEDIA_URL}}{{page.homepage.bg_global_img}}") no-repeat scroll center 60% / cover;
+			{% else %}
+				background: transparent url("{{STATIC_URL}}css/img/bg-main.jpg") no-repeat scroll center 60% / cover;
+			{% endif %}
+		}
+		.bg-global{
+			{% if page.homepage.bg_global_img %}
+				background: transparent url("{{ MEDIA_URL}}{{page.homepage.bg_global_img}}") no-repeat scroll  bottom center / cover;
+			{% else %}
+				background: transparent url("{{STATIC_URL}}css/img/bg-main.jpg") no-repeat scroll bottom center / cover;
+			{% endif %}
+		}
+		.modal{
+			{% if page.homepage.modal_img %}
+				background: transparent url("{{MEDIA_URL}}{{page.homepage.modal_img}}") repeat scroll 0px 0px !important;
+			{% else %}
+				background: transparent url("{{STATIC_URL}}css/img/bg-paper.jpg") repeat scroll 0px 0px !important;
+			{% endif %}
+		}
+		#portfolio {
+			{% if page.homepage.portfolio_img %}
+				background: transparent url("{{MEDIA_URL}}{{page.homepage.portfolio_img}}") repeat scroll 0px 0px;
+			{% else %}	
+				background: transparent url("{{STATIC_URL}}css/img/bg-paper.jpg") repeat scroll 0px 0px;
+			{% endif %}
+		}
+	</style>
+{% endblock %}
+
 {% block extra_js %}
 {{ block.super }}
 	<script type="text/javascript">

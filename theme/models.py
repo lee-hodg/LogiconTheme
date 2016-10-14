@@ -49,6 +49,19 @@ class HomePage(Page, RichText):
                                           ' Send us an email using the link below.'),
                                  help_text='Text for contact section')
 
+    bg_global_img = FileField(verbose_name=_('Global background'),
+                              upload_to=upload_to('theme.HomePage.bg_global_img', 'bgs'),
+                              format='Image', max_length=255, blank=True, null=True)
+    footer_img = FileField(verbose_name=_('Footer background'),
+                           upload_to=upload_to('theme.HomePage.footer_img', 'bgs'),
+                           format='Image', max_length=255, blank=True, null=True)
+    portfolio_img = FileField(verbose_name=_('Portfolio background'),
+                              upload_to=upload_to('theme.homepage.portfolio_img', 'bgs'),
+                              format='Image', max_length=255, blank=True, null=True)
+    modal_img = FileField(verbose_name=_('Portfolio modal background'),
+                          upload_to=upload_to('theme.HomePage.modal_img', 'bgs'),
+                          format='Image', max_length=255, blank=True, null=True)
+
     class Meta:
         verbose_name = _('Home page')
         verbose_name_plural = _('Home pages')
