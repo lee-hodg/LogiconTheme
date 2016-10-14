@@ -44,6 +44,46 @@ register_setting(
     default="lee@logicon.io",
 )
 
+register_setting(
+    name="GMAP_LOC",
+    label=_("Google map location"),
+    description=_("Centre address for google maps. "),
+    editable=True,
+    default="London, UK",
+)
+
+register_setting(
+    name="GMAP_APIKEY",
+    label=_("Google maps API key"),
+    description=_("Google maps API Key"),
+    editable=True,
+    default=" ",
+)
+
+register_setting(
+    name="GMAP_ZOOM",
+    label=_("Google map zoom level"),
+    description=_("Google maps zoom level"),
+    editable=True,
+    default="4",
+)
+
+register_setting(
+    name="GMAP_DISABLE_UI",
+    label=_("User control map"),
+    description=_("Can user zoom, pan etc or is map static?"),
+    editable=True,
+    default=False,
+)
+
+register_setting(
+    name="GMAP_ICON_SIZE",
+    label=_("Size of marker (px)"),
+    description=_("The size of icon on the map in pixels"),
+    editable=True,
+    default=16
+)
+
 #TEMPLATE_ACCESSIBLE_SETTINGS is one of the existing settings
 #specifying all setting names available within templates, thus
 #we want to append our new settings to it so we can use them in templates
@@ -54,5 +94,10 @@ register_setting(
              "EMAIL",
 			 "UPWORK_PROFILE",
 			 "GPG_KEY",
+			 "GMAP_LOC",
+			 "GMAP_ZOOM",
+			 "GMAP_APIKEY",
+             "GMAP_DISABLE_UI",
+             "GMAP_ICON_SIZE",
              ),
 )

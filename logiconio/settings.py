@@ -85,6 +85,18 @@ from django.utils.translation import ugettext_lazy as _
 # INSTALLED_APPS setting.
 USE_MODELTRANSLATION = False
 
+# A sequence of templates used by the ``page_menu`` template tag. Each
+# item in the sequence is a three item sequence, containing a unique ID
+# for the template, a label for the template, and the template path.
+# These templates are then available for selection when editing which
+# menus a page should appear in. Note that if a menu template is used
+# that doesn't appear in this setting, all pages will appear in it.
+PAGE_MENU_TEMPLATES = ((1, "Top menu", "pages/menus/top_menu.html"),
+                       )
+
+# Pages not in any menu by default
+PAGE_MENU_TEMPLATES_DEFAULT = ()
+
 
 ########################
 # MAIN DJANGO SETTINGS #

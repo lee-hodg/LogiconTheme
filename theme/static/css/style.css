@@ -1,4 +1,19 @@
 /*****************THINGS ADDED BY LEE *****************************/
+/*
+.skill-item > div.infos > div.inner > a.editable-link{
+    padding-top: 70px;
+}
+*/
+
+
+.skill-item .editable-form p, .skill-item .editable-form p input{
+    line-height: 0px!important;
+}
+
+#map-canvas {
+    color: red!important;
+}
+
 /* Button on modal portfolio detail, which links to launch project*/
 .button {
     background-color:#0D79A9;

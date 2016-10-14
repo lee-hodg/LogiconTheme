@@ -77,9 +77,14 @@
 				<div class="menu-wrapper">
 					<nav class="main-menu" role="navigation">
 						<ul id="menu-menu-principal" class="nav top-nav cf">
+                            {% block topmenu %}
+                            {% page_menu "pages/menus/top_menu.html" %}
+                            {% endblock %}
+                            {% comment %}
 							<li><a href="#portfolio">Portfolio</a></li>
 							<li><a href="#services">Services</a></li>
 							<li><a href="#contact">Contact</a></li>
+                            {% endcomment %}
 						</ul>
 					</nav>
 

@@ -38,6 +38,10 @@ class HomePage(Page, RichText):
                                            help_text='If selected items from this portfolio will be featured '
                                                      'on the home page.')
 
+    map_icon = FileField(verbose_name=_('Map marker icon'),
+                         upload_to=upload_to('theme.HomePage.map_icon', 'icons'),
+                         format='Image', max_length=255, blank=True, null=True)
+
     contact_text = RichTextField(max_length=1000,
                                  default=('One of our team would be happy to discuss'
                                           ' in detail our skillset and experience'
@@ -48,6 +52,19 @@ class HomePage(Page, RichText):
     class Meta:
         verbose_name = _('Home page')
         verbose_name_plural = _('Home pages')
+
+
+class MapPlace(Orderable):
+    '''
+    A visited place to be displayed on the gmap.
+    Should have title, long, lat and z-index
+    '''
+    homepage = models.ForeignKey(HomePage, related_name='places')
+    title = models.CharField(max_length=200)
+    lat = models.CharField(max_length=50)
+    lng = models.CharField(max_length=50)
+    zind = models.IntegerField(help_text="z-index in relation to other places.")
+    msg = models.CharField(max_length=200, help_text="Msg when user clicks marker. Use %LOC_PLACEHOLDER% as placeholder for location in your text.")
 
 
 class IconBlurb(Orderable):

@@ -2,7 +2,7 @@
 from django.contrib import admin
 from mezzanine.core.admin import TabularDynamicInlineAdmin
 from mezzanine.pages.admin import PageAdmin
-from .models import HomePage, IconBlurb
+from .models import HomePage, IconBlurb, MapPlace
 
 
 # TabularDynamicInlineAdmin for the Slide and IconBlurb
@@ -11,9 +11,13 @@ class IconBlurbInline(TabularDynamicInlineAdmin):
     model = IconBlurb
 
 
+class MapPlaceInline(TabularDynamicInlineAdmin):
+    model = MapPlace
+
+
 # HomePage admin custom class.
 class HomePageAdmin(PageAdmin):
-    inlines = [IconBlurbInline, ]
+    inlines = [IconBlurbInline, MapPlaceInline]
 
 # register HomePage with its custom admin model
 admin.site.register(HomePage, HomePageAdmin)

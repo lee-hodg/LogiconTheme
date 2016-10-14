@@ -2,6 +2,7 @@
 {% load i18n static mezzanine_tags %}
 
 {% block extra_js %}
+{{ block.super }}
 	<script type="text/javascript">
 	$(document).on('click', '.pagination a', function(){
 		$.ajax({ // create an AJAX call...
@@ -27,6 +28,131 @@
 	   });
 	});
 	</script>
+
+    {% if settings.GMAP_APIKEY and page.homepage.places.count > 0 %}
+    <!-- The google map -->
+    {# the external js link should be outside the compress tags, and thus outside the extra_js block #}
+    <script type="text/javascript" 
+            src="https://maps.googleapis.com/maps/api/js?key={{ settings.GMAP_APIKEY }}">
+    </script>
+	<script type="text/javascript">
+     geocoder = new google.maps.Geocoder();
+     function initializeGeo(addr) {
+         // Takes an address gives a lat lng
+         // note this is an asynchronous func, meaning you can run into issues like
+         // http://stackoverflow.com/questions/9345556/waiting-for-google-maps-geocoder easily
+         // use as callback
+         // in light of that initialize of the map itself is only called when we're done geocoding the center
+         console.log('Geocoding addr:'+addr);
+         geocoder.geocode( { 'address': addr}, function(results, status) {
+           if (status == google.maps.GeocoderStatus.OK) {
+             console.log('geocoder status OK for addr:'+addr);
+             //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
+             var geoAddr = results[0].geometry.location
+             console.log('geocoder returning: ('+geoAddr.lat()+', '+geoAddr.lng() + ')');
+             // Only run initialize on successfully finishing geocoding
+             if(geoAddr.lat() != undefined && geoAddr.lng() != undefined){
+                    initialize({ lat: geoAddr.lat(), lng: geoAddr.lng()});
+                }else{
+                    console.log('Undefined result from geocoding addr, use default');
+                    initialize({ lat: 3.138832, lng: 101.681191});  // KL
+             }
+           } else {
+             console.log("Geocode was not successful for the following reason: " + status);
+             return {}
+           }
+         });
+       }
+
+      function initialize(latlng) {
+        console.log('Centering map at:', latlng);
+        var mapOptions = {
+                         scrollwheel: false,
+                         center: latlng,
+                         zoom: {{ settings.GMAP_ZOOM|default:4 }},
+                         {% if settings.GMAP_DISABLE_UI %}
+                         disableDefaultUI: true, //no zoom, pan etc 
+                         {% endif %}
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        // add markers with complex icons
+        setMarkers(map, markers);
+
+      }
+
+      google.maps.event.addDomListener(window, 'load', initializeGeo("{{ settings.GMAP_LOC|default:'Bangkok, Thailand' }}"));
+
+      /*
+       * Data for the markers consisting of a name, a LatLng and a zIndex for
+       * the order in which these markers should display on top of each
+       * other. This should be taken from the admin settings for the homepage model,
+       * Need a map section that allows place objects (title, location, z-index) to be added.
+       * Even better if we can use the geocoding API, to code them to lat, lng if needed.
+       */
+      var markers = [];
+      {% for sp in page.homepage.places.all %} 
+        // consider geocoding so more user friendly
+        // geocoder = new google.maps.Geocoder();
+        markers.push(["{{ sp.title }}", {{ sp.lat }}, {{ sp.lng }}, {{ sp.zind }}, "{{ sp.msg }}"]);
+      {% endfor %}
+
+
+      function listenMarker (map, marker, msg)
+      {
+       // so marker is associated with the closure created for the listenMarker function call
+       // (if you just did the addListener in the for loop you get only the last in list, see
+       // http://stackoverflow.com/questions/2357323/trying-to-bind-multiple-infowindows-to-multiple-markers-on-a-google-map-and-failing
+	   var cont = msg.replace(/%LOC_PLACEHOLDER%/g, marker.title);
+       var infowindow = new google.maps.InfoWindow({
+            content: cont
+       });
+       google.maps.event.addListener(marker, 'click', function() {
+                         console.log('You clicked on:'+marker.title);
+                         infowindow.open(map, marker);
+                         });
+      } 
+
+      function setMarkers(map, locations) {
+        // Add markers to the map
+      
+        // Marker sizes are expressed as a Size of X,Y
+        // where the origin of the image (0,0) is located
+        // in the top left of the image.
+      
+        // Origins, anchor positions and coordinates of the marker
+        // increase in the X direction to the right and in
+        // the Y direction down.
+        var image = {
+          {% if page.homepage.map_icon %}
+          url: '{{MEDIA_URL}}{% thumbnail page.homepage.map_icon settings.GMAP_ICON_SIZE|default:16 settings.GMAP_ICON_SIZE|default:16 top=0 %}',
+          {% else %}
+          url: '{{ STATIC_URL }}{% thumbnail "css/img/logicon_logo.png" settings.GMAP_ICON_SIZE|default:16 settings.GMAP_ICON_SIZE|default:16 top=0 %}',
+          {% endif %}
+          size: new google.maps.Size({{settings.GMAP_ICON_SIZE|default:16}}, {{settings.GMAP_ICON_SIZE|default:16}}),
+          // The origin for this image is 0,0.
+          origin: new google.maps.Point(0,0),
+          // The anchor for this image is at centre of img
+          anchor: new google.maps.Point(8, 8)
+        };
+        for (var i = 0; i < locations.length; i++) {
+          var marker = locations[i];
+          var myLatLng = new google.maps.LatLng(marker[1], marker[2]);
+          var gmarker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+              icon: image,
+              title: marker[0],
+              zIndex: marker[3]
+          });
+
+        // Display the custom message
+        listenMarker(map, gmarker, marker[4]);
+        }
+      }
+
+    </script>
+    {% endif %}
 {% endblock %}
 
 {% block inner_content %} 
@@ -34,7 +160,9 @@
 	<div id="home" class="content-wrap" style="min-height: 620px; padding-top: 150px; padding-bottom: 200px;">
 		<div class="content-wrap-inner">
 			<div class="logo">
+                {# {% editable page.homepage.logo_icon %} #}
                 <img src="{{MEDIA_URL}}{% thumbnail page.homepage.logo_icon 200 200 top=0 %}" alt="{{ settings.SITE_TITLE}}" />
+                {# {% endeditable %} #}
 			</div>
             <h1>{% editable page.homepage.heading %} {{ page.homepage.heading|richtext_filters|safe}} {% endeditable %}</h1>
 		</div><!-- content-wrap-inner -->
@@ -42,8 +170,10 @@
 
     <div id="portfolio" class="content-wrap" style="min-height: 620px;">
         <div class="content-wrap-inner">
-            <h2>{% editable page.homepage.portfolio_heading %} {{ page.homepage.portfolio_heading }} {% endeditable %}</h2>
-            <h3>{% editable page.homepage.portfolio_subheading %} {{ page.homepage.portfolio_subheading }} {% endeditable %}</h3>
+            {% editable page.homepage.portfolio_heading page.homepage.portfolio_subheading %}
+            <h2>{{ page.homepage.portfolio_heading }}</h2>
+            <h3>{{ page.homepage.portfolio_subheading }}</h3>
+            {% endeditable %}
             
             <div class="sep"></div>
             <div class="ajax-loader" style="display:none">
@@ -62,8 +192,10 @@
     {% if page.homepage.blurbs.all %}
     <div id="services" class="content-wrap" style="min-height: 511px;" >
         <div class="content-wrap-inner">
-            <h2>{% editable page.homepage.services_heading %} {{ page.homepage.services_heading }} {% endeditable %}</h2>
-            <h3>{% editable page.homepage.services_subheading %} {{ page.homepage.services_subheading }} {% endeditable %}</h3>
+            {% editable page.homepage.services_heading page.homepage.services_subheading %}
+            <h2>{{ page.homepage.services_heading }}</h2>
+            <h3>{{ page.homepage.services_subheading }}</h3>
+            {% endeditable %}
 
             <div class="sep"></div>
 
@@ -80,8 +212,10 @@
                         </div>
                         <div class="infos">
                             <div class="inner">
+                                {% editable blurb.title blurb.content %}
                                 <h4>{{ blurb.title }}</h4>
                                 <p>{{ blurb.content }}</p>
+                                {% endeditable %}
                             </div>
                         </div>
                     </div>
@@ -90,6 +224,14 @@
             </div><!--slider-skills-->
         </div><!-- content-wrap-inner-->
     </div><!-- services -->	
+    {% endif %}
+
+    {% if settings.GMAP_APIKEY and page.homepage.places.count > 0 %}
+    <div id="map-canvas" class="content-wrap" style="min-height: 511px;" >
+        <div class="content-wrap-inner">
+			<div id="map-canvas"></div>
+		</div>
+	</div>
     {% endif %}
 
     <footer id="contact" class="footer" role="contentinfo">
