@@ -22,16 +22,16 @@ register_setting(
     name="SOCIAL_LINK_FLICKR",
     label=_("Flickr link"),
     description=_("If present a Flickr icon linking here will be in the "
-                  "footer and contact sections."),
+                  "header."),
     editable=True,
-    default="https://www.flickr.com/photos/leehodg/",
+    default="https://www.flickr.com/photos/blueocean64/",
 )
 
 register_setting(
     name="SOCIAL_LINK_GPLUS",
     label=_("Google plus link"),
     description=_("If present a Google-plus icon linking here will be in the "
-                  "footer and contact sections."),
+                  "header"),
     editable=True,
     default=" ",
 )
@@ -40,7 +40,7 @@ register_setting(
     name="SOCIAL_LINK_TWITTER",
     label=_("Twitter link"),
     description=_("If present a Twitter icon linking here will be in the "
-                  "footer and contact sections."),
+                  "header."),
     editable=True,
     default="https://twitter.com/MEZZaTHEME",
 )
@@ -49,18 +49,18 @@ register_setting(
     name="SOCIAL_LINK_DELICIOUS",
     label=_("Delicious link"),
     description=_("If present a delicious icon linking here will be in the "
-                  "footer and contact sections."),  # the _(...) is the ugettext function imported as _
+                  "header"),
     editable=True,
-    default="https://delicious.com/test",
+    default=" ",
 )
 
 register_setting(
     name="SOCIAL_LINK_TUMBLR",
     label=_("Tumblr link"),
     description=_("If present a tumblr icon linking here will be in the "
-                  "footer and contact sections."),  # the _(...) is the ugettext function imported as _
+                  " header"),
     editable=True,
-    default="https://tumblr.com/test",
+    default=" ",
 )
 
 register_setting(
@@ -74,9 +74,9 @@ register_setting(
 register_setting(
     name="SOCIAL_LINK_UPWORK_PROFILE",
     label=_("Upwork profile"),
-    description=_("Link to upwork profile"),
+    description=_("Link to upwork profile in header"),
     editable=True,
-    default="http://www.upwork.com/o/profiles/users/_~01dcfbf8526ffd5b29/",
+    default=" ",
 )
 
 register_setting(
@@ -84,7 +84,7 @@ register_setting(
     label=_("Email address"),
     description=_("Email address for contact"),
     editable=True,
-    default="lee@logicon.io",
+    default="me@somewhere.com",
 )
 
 register_setting(
@@ -127,6 +127,14 @@ register_setting(
     default=16
 )
 
+register_setting(
+    name="PORTFOLIO_ITEMS_PER_PAGE",
+    label=_("Portfolio items per page"),
+    description=_("The number of portfolio items per page (restart after change)"),
+    editable=True,
+    default=6
+)
+
 # TEMPLATE_ACCESSIBLE_SETTINGS is one of the existing settings
 # specifying all setting names available within templates, thus
 # we want to append our new settings to it so we can use them in templates
@@ -147,5 +155,6 @@ register_setting(
              "GMAP_APIKEY",
              "GMAP_DISABLE_UI",
              "GMAP_ICON_SIZE",
+             "PORTFOLIO_ITEMS_PER_PAGE",
              ),
 )

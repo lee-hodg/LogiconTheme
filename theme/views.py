@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.conf import settings
+from mezzanine.conf import settings as mezzsettings
 from django.http import HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.template import RequestContext
@@ -30,7 +31,7 @@ class JSONResponseMixin(object):
 
 class AJAXPortfolioPageView(JSONResponseMixin, ListView):
     model = PortfolioItem
-    paginate_by = 6
+    paginate_by = getattr(mezzsettings, 'PORTFOLIO_ITEMS_PER_PAGE', 6)
     context_object_name = "items"
 
     def render_to_response(self, context):
@@ -43,6 +44,7 @@ class AJAXPortfolioPageView(JSONResponseMixin, ListView):
             return self.render_to_json_response({'section_html': section_html})
         else:
             return HttpResponseBadRequest('AJAX only')
+
 
 class AJAXPortfolioDetailView(DetailView):
     model = PortfolioItem

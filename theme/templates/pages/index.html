@@ -72,10 +72,6 @@
 
     {% if settings.GMAP_APIKEY and page.homepage.places.count > 0 %}
     <!-- The google map -->
-    {# the external js link should be outside the compress tags, and thus outside the extra_js block #}
-    <script type="text/javascript" 
-            src="https://maps.googleapis.com/maps/api/js?key={{ settings.GMAP_APIKEY }}">
-    </script>
 	<script type="text/javascript">
      geocoder = new google.maps.Geocoder();
      function initializeGeo(addr) {

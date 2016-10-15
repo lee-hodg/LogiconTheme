@@ -2,6 +2,7 @@ from mezzanine.pages.page_processors import processor_for
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import PortfolioItem
 from .models import HomePage
+from mezzanine.conf import settings as mezzsettings
 
 
 @processor_for(PortfolioItem)
@@ -19,7 +20,7 @@ def portfolioitem_processor(request, page):
 def home_processor(request, page):
     items = PortfolioItem.objects.published(for_user=request.user).prefetch_related('categories')
     items = items.filter(featured=True)  # only keep featured ones.
-    paginator = Paginator(items, 6)
+    paginator = Paginator(items, getattr(mezzsettings, 'PORTFOLIO_ITEMS_PER_PAGE', '6'))
     page_no = request.GET.get('page')
     try:
         items = paginator.page(page_no)
