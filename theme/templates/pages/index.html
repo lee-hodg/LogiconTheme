@@ -82,7 +82,11 @@
 		<div class="content-wrap-inner">
 			<div class="logo">
                 {# {% editable page.homepage.logo_icon %} #}
+                {% if page.homepage.logo_icon %}
                 <img src="{{MEDIA_URL}}{% thumbnail page.homepage.logo_icon 200 200 top=0 %}" alt="{{ settings.SITE_TITLE}}" />
+                {% else %}
+                <img src="{{STATIC_URL}}css/img/logicon_logo.png" alt="{{ settings.SITE_TITLE}}" />
+                {% endif %}
                 {# {% endeditable %} #}
 			</div>
             <h1>{% editable page.homepage.heading %} {{ page.homepage.heading|richtext_filters|safe}} {% endeditable %}</h1>

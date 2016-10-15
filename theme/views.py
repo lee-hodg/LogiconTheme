@@ -31,7 +31,10 @@ class JSONResponseMixin(object):
 
 class AJAXPortfolioPageView(JSONResponseMixin, ListView):
     model = PortfolioItem
-    paginate_by = getattr(mezzsettings, 'PORTFOLIO_ITEMS_PER_PAGE', 6)
+    try:
+        paginate_by = getattr(mezzsettings, 'PORTFOLIO_ITEMS_PER_PAGE', 6)
+    except Exception:
+        paginate_by = 6
     context_object_name = "items"
 
     def render_to_response(self, context):
