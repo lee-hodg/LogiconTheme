@@ -1,14 +1,14 @@
 from mezzanine.conf import register_setting
-from django.utils.translation import ugettext_lazy as _  #import as '_', used for trans
+from django.utils.translation import ugettext_lazy as _  # import as '_', used for trans
 
-#These register setting to editable in the admin easily.
+# These register setting to editable in the admin easily.
 # http://mezzanine.jupo.org/docs/configuration.html#registering-settings
 
-#Register our new settings, so we can change their vals in admin.
-#this also makes them available in a view say as
-#from mezzanine.conf import settings
-#settings.SOCIAL_LINK_FACEBOOK.
-#But if we want avail in template see further down.
+# Register our new settings, so we can change their vals in admin.
+# this also makes them available in a view say as
+# from mezzanine.conf import settings
+# settings.SOCIAL_LINK_FACEBOOK.
+# But if we want avail in template see further down.
 register_setting(
     name="SOCIAL_LINK_FACEBOOK",
     label=_("Facebook link"),
@@ -19,17 +19,60 @@ register_setting(
 )
 
 register_setting(
-    name="GPG_KEY",
+    name="SOCIAL_LINK_FLICKR",
+    label=_("Flickr link"),
+    description=_("If present a Flickr icon linking here will be in the "
+                  "footer and contact sections."),
+    editable=True,
+    default="https://www.flickr.com/photos/leehodg/",
+)
+
+register_setting(
+    name="SOCIAL_LINK_GPLUS",
+    label=_("Google plus link"),
+    description=_("If present a Google-plus icon linking here will be in the "
+                  "footer and contact sections."),
+    editable=True,
+    default=" ",
+)
+
+register_setting(
+    name="SOCIAL_LINK_TWITTER",
+    label=_("Twitter link"),
+    description=_("If present a Twitter icon linking here will be in the "
+                  "footer and contact sections."),
+    editable=True,
+    default="https://twitter.com/MEZZaTHEME",
+)
+
+register_setting(
+    name="SOCIAL_LINK_DELICIOUS",
+    label=_("Delicious link"),
+    description=_("If present a delicious icon linking here will be in the "
+                  "footer and contact sections."),  # the _(...) is the ugettext function imported as _
+    editable=True,
+    default="https://delicious.com/test",
+)
+
+register_setting(
+    name="SOCIAL_LINK_TUMBLR",
+    label=_("Tumblr link"),
+    description=_("If present a tumblr icon linking here will be in the "
+                  "footer and contact sections."),  # the _(...) is the ugettext function imported as _
+    editable=True,
+    default="https://tumblr.com/test",
+)
+
+register_setting(
+    name="SOCIAL_LINK_GPG_KEY",
     label=_("Public key for gpg"),
-    description=_("Link to gpg public key on keyserver "
-        "header."),
+    description=_("Link to gpg public key on keyserver header."),
     editable=True,
     default="",
 )
 
-
 register_setting(
-    name="UPWORK_PROFILE",
+    name="SOCIAL_LINK_UPWORK_PROFILE",
     label=_("Upwork profile"),
     description=_("Link to upwork profile"),
     editable=True,
@@ -37,7 +80,7 @@ register_setting(
 )
 
 register_setting(
-    name="EMAIL",
+    name="SOCIAL_LINK_EMAIL",
     label=_("Email address"),
     description=_("Email address for contact"),
     editable=True,
@@ -84,19 +127,24 @@ register_setting(
     default=16
 )
 
-#TEMPLATE_ACCESSIBLE_SETTINGS is one of the existing settings
-#specifying all setting names available within templates, thus
-#we want to append our new settings to it so we can use them in templates
+# TEMPLATE_ACCESSIBLE_SETTINGS is one of the existing settings
+# specifying all setting names available within templates, thus
+# we want to append our new settings to it so we can use them in templates
 register_setting(
     name="TEMPLATE_ACCESSIBLE_SETTINGS",
-    append=True,                           #Because we append these to
-    default=("SOCIAL_LINK_FACEBOOK",       #existing templatate accessible settings.
-             "EMAIL",
-			 "UPWORK_PROFILE",
-			 "GPG_KEY",
-			 "GMAP_LOC",
-			 "GMAP_ZOOM",
-			 "GMAP_APIKEY",
+    append=True,                           # Because we append these to
+    default=("SOCIAL_LINK_FACEBOOK",       # existing templatate accessible settings.
+             "SOCIAL_LINK_TWITTER",
+             "SOCIAL_LINK_FLICKR",
+             "SOCIAL_LINK_GPLUS",
+             "SOCIAL_LINK_TUMBLR",
+             "SOCIAL_LINK_DELICIOUS",
+             "SOCIAL_LINK_UPWORK_PROFILE",
+             "SOCIAL_LINK_GPG_KEY",
+             "SOCIAL_LINK_EMAIL",
+             "GMAP_LOC",
+             "GMAP_ZOOM",
+             "GMAP_APIKEY",
              "GMAP_DISABLE_UI",
              "GMAP_ICON_SIZE",
              ),

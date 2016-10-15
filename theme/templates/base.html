@@ -88,17 +88,47 @@
 					</nav>
 
 					<div class="btn-social-wrapper">
-                        {% if settings.EMAIL %}
-                            <a rel="email"  href="mailto:{{ settings.EMAIL }}" class="fancyimage">
+						{% if settings.SOCIAL_LINK_FACEBOOK %}
+                        <a title="facebook" rel="facebook" href="{{ settings.SOCIAL_LINK_FACEBOOK}}" class="fancyimage">
+							<i class="fa fa-facebook"></i>
+						</a>
+						{% endif %}
+						{% if settings.SOCIAL_LINK_TWITTER %}
+                        <a title="twitter" rel="twitter" href="{{ settings.SOCIAL_LINK_TWITTER}}" class="fancyimage">
+							<i class="fa fa-twitter"></i>
+						</a>
+						{% endif %}
+						{% if settings.SOCIAL_LINK_FLICKR %}
+                        <a title="flickr" rel="flickr" href="{{ settings.SOCIAL_LINK_FLICKR}}" class="fancyimage">
+							<i class="fa fa-flickr"></i>
+						</a>
+						{% endif %}
+						{% if settings.SOCIAL_LINK_DELICIOUS %}
+                        <a title="delicious" rel="delicious" href="{{ settings.SOCIAL_LINK_DELICIOUS}}" class="fancyimage">
+							<i class="fa fa-delicious"></i>
+						</a>
+						{% endif %}
+						{% if settings.SOCIAL_LINK_TUMBLR %}
+                        <a title="tumblr" rel="tumblr" href="{{ settings.SOCIAL_LINK_TUMBLR}}" class="fancyimage">
+							<i class="fa fa-tumblr"></i>
+						</a>
+						{% endif %}
+						{% if settings.SOCIAL_LINK_GPLUS %}
+                        <a title="google plus" rel="google-plus" href="{{ settings.SOCIAL_LINK_GPLUS}}" class="fancyimage">
+							<i class="fa fa-google-plus"></i>
+						</a>
+						{% endif %}
+                        {% if settings.SOCIAL_LINK_EMAIL %}
+                            <a rel="email"  href="mailto:{{ settings.EMAIL }}" class="fancyimage" title="Email Us">
                                 <i class="fa fa-envelope-o"></i>
                             </a>
                         {% endif %}
-                        {% if settings.UPWORK_PROFILE %}
+                        {% if settings.SOCIAL_LINK_UPWORK_PROFILE %}
                             <a href="{{settings.UPWORK_PROFILE}}" target="_blank" title="Upwork Profile">
                                 <span style="font-size: 22px;">U</span>
                             </a>
                         {% endif %}
-                        {% if settings.GPG_KEY %}
+                        {% if settings.SOCIAL_LINK_GPG_KEY %}
                             <a href="{{settings.GPG_KEY}}" target="_blank" title="GPG Key">
                                 <span style="font-size: 22px;"><i class="fa fa-lock"></i></span>
                             </a>

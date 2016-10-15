@@ -95,13 +95,6 @@ class IconBlurb(Orderable):
                             help_text='Optional, if provided clicking the blurb will go here.')
 
 
-COLUMNS_CHOICES = (
-    ('6', 'Two columns'),  # two columns use span6
-    ('4', 'Three columns'),  # three columns use span4
-    ('3', 'Four Columns'),  # four columns use span3
-)
-
-
 class Portfolio(Page):
     '''
     A collection of individual portfolio items
@@ -109,8 +102,6 @@ class Portfolio(Page):
     add a portfolio page, then 'under it' add portfolio item pages)
     '''
     content = RichTextField(blank=True)
-    columns = models.CharField(max_length=1, choices=COLUMNS_CHOICES,
-                               default='3')
 
     class Meta:
         verbose_name = _('Portfolio')
