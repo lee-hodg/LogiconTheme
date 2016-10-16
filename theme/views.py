@@ -37,6 +37,10 @@ class AJAXPortfolioPageView(JSONResponseMixin, ListView):
         paginate_by = 6
     context_object_name = "items"
 
+    def get_queryset(self):
+        qs = super(AJAXPortfolioPageView, self).get_queryset()
+        return qs.filter(featured=True)
+
     def render_to_response(self, context):
         if self.request.is_ajax():
             # AJAX req.
