@@ -34,6 +34,7 @@
 					 scrollwheel: false,
 					 center: latlng,
 					 zoom: {{ settings.GMAP_ZOOM|default:4 }},
+                     // settings.GMAP_DISABLE_UI: {{ settings.GMAP_DISABLE_UI }}
 					 {% if settings.GMAP_DISABLE_UI %}
 					 disableDefaultUI: true, //no zoom, pan etc 
 					 {% endif %}

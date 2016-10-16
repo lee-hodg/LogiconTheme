@@ -123,17 +123,17 @@
 						</a>
 						{% endif %}
                         {% if settings.SOCIAL_LINK_EMAIL %}
-                            <a rel="email"  href="mailto:{{ settings.EMAIL }}" class="fancyimage" title="Email Us">
+                            <a rel="email"  href="mailto:{{ settings.SOCIAL_LINK_EMAIL }}" class="fancyimage" title="Email Us">
                                 <i class="fa fa-envelope-o"></i>
                             </a>
                         {% endif %}
                         {% if settings.SOCIAL_LINK_UPWORK_PROFILE %}
-                            <a href="{{settings.UPWORK_PROFILE}}" target="_blank" title="Upwork Profile">
+                            <a href="{{settings.SOCIAL_LINK_UPWORK_PROFILE}}" target="_blank" title="Upwork Profile">
                                 <span style="font-size: 22px;">U</span>
                             </a>
                         {% endif %}
                         {% if settings.SOCIAL_LINK_GPG_KEY %}
-                            <a href="{{settings.GPG_KEY}}" target="_blank" title="GPG Key">
+                            <a href="{{settings.SOCIAL_LINK_GPG_KEY}}" target="_blank" title="GPG Key">
                                 <span style="font-size: 22px;"><i class="fa fa-lock"></i></span>
                             </a>
                         {% endif %}

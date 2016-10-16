@@ -42,11 +42,16 @@ from django.utils.translation import ugettext_lazy as _
 # menus a page should appear in. Note that if a menu template is used
 # that doesn't appear in this setting, all pages will appear in it.
 
-# PAGE_MENU_TEMPLATES = (
-#     (1, _("Top navigation bar"), "pages/menus/dropdown.html"),
-#     (2, _("Left-hand tree"), "pages/menus/tree.html"),
-#     (3, _("Footer"), "pages/menus/footer.html"),
-# )
+PAGE_MENU_TEMPLATES = (
+    (1, _("Top navigation bar"), "pages/menus/top_menu.html"),
+    (2, _("Footer"), "pages/menus/footer.html"),
+)
+
+# Pages in non-existant footer menu by default (i.e. not shown)
+# It seems impossible to uncheck a page from all menus completely,
+# so since we don't want the HomePage to be in any menu, just keep footer menu
+# as a substitute for don't show
+PAGE_MENU_TEMPLATES_DEFAULT = (2, )
 
 # A sequence of fields that will be injected into Mezzanine's (or any
 # library's) models. Each item in the sequence is a four item sequence.
@@ -84,19 +89,6 @@ from django.utils.translation import ugettext_lazy as _
 # If True, the django-modeltranslation will be added to the
 # INSTALLED_APPS setting.
 USE_MODELTRANSLATION = False
-
-# A sequence of templates used by the ``page_menu`` template tag. Each
-# item in the sequence is a three item sequence, containing a unique ID
-# for the template, a label for the template, and the template path.
-# These templates are then available for selection when editing which
-# menus a page should appear in. Note that if a menu template is used
-# that doesn't appear in this setting, all pages will appear in it.
-PAGE_MENU_TEMPLATES = ((1, "Top menu", "pages/menus/top_menu.html"),
-                       )
-
-# Pages not in any menu by default
-PAGE_MENU_TEMPLATES_DEFAULT = ()
-
 
 ########################
 # MAIN DJANGO SETTINGS #

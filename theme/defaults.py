@@ -24,7 +24,7 @@ register_setting(
     description=_("If present a Flickr icon linking here will be in the "
                   "header."),
     editable=True,
-    default="https://www.flickr.com/photos/blueocean64/",
+    default="",
 )
 
 register_setting(
@@ -33,7 +33,7 @@ register_setting(
     description=_("If present a Google-plus icon linking here will be in the "
                   "header"),
     editable=True,
-    default=" ",
+    default="",
 )
 
 register_setting(
@@ -51,7 +51,7 @@ register_setting(
     description=_("If present a delicious icon linking here will be in the "
                   "header"),
     editable=True,
-    default=" ",
+    default="",
 )
 
 register_setting(
@@ -60,7 +60,7 @@ register_setting(
     description=_("If present a tumblr icon linking here will be in the "
                   " header"),
     editable=True,
-    default=" ",
+    default="",
 )
 
 register_setting(
@@ -76,7 +76,7 @@ register_setting(
     label=_("Upwork profile"),
     description=_("Link to upwork profile in header"),
     editable=True,
-    default=" ",
+    default="",
 )
 
 register_setting(
@@ -113,8 +113,8 @@ register_setting(
 
 register_setting(
     name="GMAP_DISABLE_UI",
-    label=_("User control map"),
-    description=_("Can user zoom, pan etc or is map static?"),
+    label=_("User control of map disabled"),
+    description=_("Can user zoom, pan etc disabled?"),
     editable=True,
     default=False,
 )
