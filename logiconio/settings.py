@@ -299,7 +299,7 @@ OPTIONAL_APPS = (
     PACKAGE_NAME_GRAPPELLI,
 )
 
-SECRET_KEY = 'b+9130pdny-930z#)#s+&b-$gse_4zf#lc!c1j9m^72r%5(rwc'
+SECRET_KEY = '811f8eda2b1^=m*dx#!wh7=6e6#906x$ya--5!m1j(2c_7hoek'
 
 ##################
 # LOCAL SETTINGS #
