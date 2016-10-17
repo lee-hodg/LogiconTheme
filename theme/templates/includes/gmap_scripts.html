@@ -32,6 +32,7 @@
 	console.log('Centering map at:', latlng);
 	var mapOptions = {
 					 scrollwheel: false,
+                     draggable: false,
 					 center: latlng,
 					 zoom: {{ settings.GMAP_ZOOM|default:4 }},
                      // settings.GMAP_DISABLE_UI: {{ settings.GMAP_DISABLE_UI }}
