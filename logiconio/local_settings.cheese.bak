@@ -15,7 +15,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['logicon.io',]
+ALLOWED_HOSTS = ['logicon.io','www.logicon.io']
 
 DEBUG = False
 
