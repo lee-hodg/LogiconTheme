@@ -5,6 +5,7 @@
 *.pyc
 *.log
 /venv
+/static
 local_settings.py
 celerybeat-schedule
 *.pjson
