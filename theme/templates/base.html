@@ -5,8 +5,8 @@
     <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
     <link rel="shortcut icon" href="{% static 'css/img/favicon.ico' %}">
 
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
-	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     {% compress css %}
     <link href="{% static 'css/bootstrapgrid.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'css/normalize.css' %}" rel="stylesheet" type="text/css" />
@@ -15,14 +15,14 @@
     <link href="{% static 'css/jquery.modal.css' %}" rel="stylesheet" type="text/css" media="screen" />
     {% block extra_css %}{% endblock %} {% endcompress %}
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     {# the external js link should be outside the compress tags => outside the extra_js block #}
     <script type="text/javascript" 
             src="https://maps.googleapis.com/maps/api/js?key={{ settings.GMAP_APIKEY }}">
     </script>
     {# Used on the portfolio modal for image slider #}
-    <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
     {# The effect to slowly scroll between sections of index #}
     <script src="//cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
     <script src="//cdn.jsdelivr.net/jquery.localscroll/1.4.0/jquery.localScroll.min.js"></script>
